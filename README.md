@@ -41,13 +41,9 @@ conforme exemplo abaixo
 6) Assegurar que a aplicação terá permissçao de leitura e de escrita na pasta "data" 
 (a pasta será usada para escrever índices e arquivos usando componente Zend_Lucene)
 
-Observação: A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) 
-para fornecer apoio e automação em atividades de build. Esse script futuramente será modificado para incluir
-a execução de uma bateria de testes unitários em PHPUnit, de modo que o build só rode se tudo estiver ok nos testes.
+Observação: A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) para fornecer apoio e automação em atividades de build. Esse script futuramente será modificado para incluir a execução de uma bateria de testes unitários em PHPUnit, de modo que o build só rode se tudo estiver ok nos testes.
 
-Créditos: Arquitetura baseada em fork realizado em projeto de exemplo 
-criado inicialmente por Keith Pope (http://www.thepopeisdead.com) 
-autor do livro Zend Framework 1.8 Web Application Development
+Créditos: Arquitetura baseada em fork realizado em projeto de exemplo criado inicialmente por Keith Pope (http://www.thepopeisdead.com) autor do livro Zend Framework 1.8 Web Application Development
 
 =================================================================
 Evoluções e futuras melhorias previstas para o projeto
@@ -57,11 +53,11 @@ Evoluções e futuras melhorias previstas para o projeto
 - refatoração para aplicação de namespaces
 - refatoração no modelo do banco de dados
 - implementar exemplo com código de integração real com gateways de pagamento PagSeguro, PayPal
-- implementar um layout e UX mais elaborandos, usando uma estrutura melhor de templates / temas / skins
+- implementar um layout e UX mais elaborados, usando estrutura melhor de templates / temas / skins
 - implementar layout mais resposivo ou com detecção de user agent para compatibilidade com smartphones
 - remover os componentes do Zend que não estão sendo utilizados
 - disponibilização de opção para baixar a aplicação via composer
 - implementação da camada de persistência usando Doctrine
 - inclusao de cobertura de testes unitarios (PHPUnit)
 - o script ant será modificado de modo a gerar builds para ambiente development / production separadamente, atualizando o arquivo store.ini conforme o ambiente target definido no build
-- criar um novo projeto visando o desenvolvimento de uma aplicação sample similar usando Zend Framework 2
+- criar um novo projeto visando o desenvolvimento de uma aplicação de funcionamento similar usando Zend Framework 2

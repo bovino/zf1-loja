@@ -24,6 +24,19 @@
                  ?>"
                title="logout">Logout</a>
         </li>
+        
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'customer',
+                        'action'     => 'myorders',
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="logout">Meus pedidos</a>
+        </li>
+        
         <?php else: ?>
         <li>
             <a href="
@@ -85,7 +98,7 @@
                         'admin', true
                     ); 
                  ?>"
-               title="Área de administração da loja">Área Admin</a>
+               title="Área de administração da loja">Área Administrativa</a>
         </li>
         <?php endif; ?>
     </ul>

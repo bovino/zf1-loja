@@ -30,5 +30,12 @@ class LOJAMOBLY_Form_Cart_Table extends LOJAMOBLY_Form_Abstract
             ),
             'label' => 'Atualizar carrinho'
         ));
+		
+		$this->addElement('submit', 'process-order', array(
+            'decorators' => array(
+                'ViewHelper'
+            ),
+            'label' => 'FINALIZAR PEDIDO'
+        ));
     }
 }
