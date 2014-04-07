@@ -1,0 +1,8 @@
+<h3> Bem-vindo à <span> área administrativa da loja </span></h3>
+<p>
+    Selecione um item para administrar:
+</p>
+
+<a href="<?=$this->url(array('controller' => 'customer', 'action' => 'list'), 'admin', true); ?>" title="Customers"> Clientes </a> <br/>
+<a href="<?=$this->url(array('controller' => 'catalog', 'action' => 'list'), 'admin', true); ?>" title="Catalog"> Produtos </a> <br/>
+<a href="<?=$this->url(array('controller' => 'category', 'action' => 'list'), 'admin', true); ?>" title="Catalog"> Categorias </a> <br/>

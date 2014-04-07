@@ -1,0 +1,92 @@
+<h2 class="noDisplay"> Menu principal </h2>
+<div class="main-nav">
+    <ul class="clearfix">
+        <li class="current">
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'index',
+                        'action'     => 'index',
+                        ), 
+                        'default', true
+                    ); 
+                 ?>" 
+               title="Homepage"> Loja </a>
+        </li>
+        <?php if ($this->AuthInfo()->isLoggedIn()): ?>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'customer',
+                        'action'     => 'logout',
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="logout">Logout</a>
+        </li>
+        <?php else: ?>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'customer',
+                        'action'     => 'login',
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="login">Login</a>
+        </li>
+        <?php endif; ?>
+		<?php if (!$this->AuthInfo()->isLoggedIn()): ?>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'customer',
+                        'action'     => 'register',
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="register"> Cadasto </a>
+        </li>
+		<?php endif; ?>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'about',
+                        'action'     => 'index',
+                        'module'     => 'lojamobly'
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="about"> Sobre a loja </a>
+        </li>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'contact',
+                        'action'     => 'index',
+                        'module'     => 'lojamobly'
+                        ), 
+                        'default', true
+                    ); 
+                 ?>"
+               title="Contact"> Contato </a>
+        </li>
+        <?php if ('Admin' === $this->AuthInfo('role')): ?>
+        <li>
+            <a href="
+                <?= $this->url(array(
+                        'controller' => 'index',
+                        'action'     => 'index',
+                        'module'     => 'cms'
+                        ), 
+                        'admin', true
+                    ); 
+                 ?>"
+               title="Área de administração da loja">Área Admin</a>
+        </li>
+        <?php endif; ?>
+    </ul>
+</div>

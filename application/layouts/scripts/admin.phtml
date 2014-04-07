@@ -1,0 +1,35 @@
+<?= $this->doctype() ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <?= $this->headTitle(); ?>
+    
+    <?= $this->headMeta(); ?>
+    
+    <?= $this->headStyle(); ?>
+    
+    <?= $this->headLink(); ?>
+    
+    <?= $this->headScript(); ?>
+</head>
+<body>
+    <h1 class="noDisplay"><?= $this->placeholder('Zend_View_Helper_HeadTitle');?></h1>
+    
+    <div id="headwrap" class="clearfix">
+        
+        <div class="right">
+           <?= $this->render('_adminnav.phtml') ?>
+        </div>    
+        
+        <div id="logo" class="left">
+            <img src="/images/layout/topo-header.png" alt=" LOJA MOBLY 2.5 " />
+        </div>
+        
+    </div>
+    
+    <div id="contentWrap" class="clearfix">
+        <?= $this->layout()->content ?> 
+    </div>
+        
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?= $this->doctype() ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <?= $this->headTitle(); ?>
+    
+    <?= $this->headMeta(); ?>
+    
+    <?= $this->headStyle(); ?>
+    
+    <?= $this->headLink(); ?>
+    
+    <?= $this->headScript(); ?>
+</head>
+<body>
+    <h1 class="noDisplay"><?= $this->placeholder('Zend_View_Helper_HeadTitle');?></h1>
+    
+    <div id="headwrap" class="clearfix">
+        
+        <div class="right">
+           <?= $this->render('_topnav.phtml') ?>
+        </div>    
+        
+        <div id="logo" class="left">
+        	<img src="/images/layout/topo-header.png" alt=" LOJA MOBLY 2.5 " />
+        </div>
+        
+    </div>
+    
+    <div id="contentWrap" class="clearfix">
+        <div class="left categorylist">
+            <div class="sub-nav">
+            <h3>Selecione uma <span> categoria </span></h3>
+                <ul>
+                    <? foreach ($this->Category() as $category): ?>
+                    <li><a href="<?=$this->url(array('categoryIdent' => $category->ident), 'catalog_category', true );?>"><?=$category->name; ?></a></li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+            <? if (0 < count($this->subCategories)):?>
+            <div class="sub-nav">
+            <h3> Lista de <span> sub-categorias </span></h3>
+                <ul>
+                    <? foreach ($this->subCategories as $category): ?>
+                    <li><a href="<?=$this->url(array('categoryIdent' => $category->ident), 'catalog_category', true );?>"><?=$category->name; ?></a></li>
+                    <? endforeach; ?>
+                </ul>
+            </div> 
+            <? endif; ?>
+            <div>
+                <h3> Em seu <span> carrinho </span></h3>
+                <?= $this->Cart()->getSummary(); ?>
+            </div>
+            <div>
+                <h3> Busca de <span> produtos </span></h3>
+                <?=$this->SearchForm()->render();?>
+            </div>
+        </div>
+        <div class="content left">
+            <?= $this->layout()->content ?> 
+       </div>
+    </div>
+    
+</body>
+</html>
