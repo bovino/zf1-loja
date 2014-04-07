@@ -8,7 +8,9 @@ Orientações gerais para rodar e evoluir o projeto:
 
 2) Baixar o projeto para uma pasta qualquer
 
-3) Criar uma base de dados no MySQL e rodar o dump (que está em database/dump_db.sql) nesta base
+3) Criar uma base de dados no MySQL e rodar o dump (que está em "database/dump_db.sql") nesta base.
+A pasta "database" também contém diagrama MER da base de dados (gerados com o MySQL Workbench 
+usando engenharia reversa).
 
 4) Configurar apontamentos de Virtual Host para a pasta public da aplicação.
 A aplicação foi testada sob a seguinte configuração de Virtual Host:
@@ -29,14 +31,18 @@ A aplicação foi testada sob a seguinte configuração de Virtual Host:
 	
 </VirtualHost>
 
-5) Alterar os parametros de acesso a banco de dados no arquivos store.ini
+5) Alterar os parametros de acesso a banco de dados no arquivo "application/config/store.ini"
+conforme exemplo abaixo
 
 resources.db.params.dbname = "lojamobly"
 resources.db.params.username = "root"
 resources.db.params.password = ""
 resources.db.params.host = "localhost"
 
-5) A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) 
+6) Assegurar que a aplicação terá permissçao de leitura e de escrita na pasta "data" 
+(a pasta será usada para escrever índices e arquivos usando componente Zend_Lucene)
+
+Observação: A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) 
 para fornecer apoio e automação em atividades de build. Esse script futuramente será modificado para incluir
 a execução de uma bateria de testes unitários em PHPUnit, de modo que o build só rode se tudo estiver ok nos testes.
 
@@ -49,23 +55,13 @@ Evoluções e futuras melhorias previstas para o projeto
 ==================================================================
 
 - finalizar a implementação da área administrativa da loja
-
 - refatoração para aplicação de namespaces
-
-- implementar exemplo com código de integração real com gateways de pagamento
-PagSeguro, PayPal
-
-- implementar um esquema visual mais elaborando e usar uma estrutura melhor de templates / temas
-
+- implementar exemplo com código de integração real com gateways de pagamento PagSeguro, PayPal
+- implementar um layout e UX mais elaborandos, usando uma estrutura melhor de templates / temas / skins
 - remover os componentes do Zend que não estão sendo utilizados
-
-- disponibilização da aplicação via composer
-
+- disponibilização de opção para baixar a aplicação via composer
 - implementação da camada de persistência usando Doctrine
-
 - inclusao de cobertura de testes unitarios
-
-- O script ant será modificado de modo a gerar builds para ambiente development / production 
+- o script ant será modificado de modo a gerar builds para ambiente development / production 
 separadamente, atualizando o arquivo store.ini conforme o ambiente target definido no build
-
-- Criar um novo projeto visando o desenvolvimento de uma aplicação sample similar usando Zend Framework 2
+- criar um novo projeto visando o desenvolvimento de uma aplicação sample similar usando Zend Framework 2
