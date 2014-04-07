@@ -15,21 +15,20 @@ usando engenharia reversa).
 4) Configurar apontamentos de Virtual Host para a pasta public da aplicação.
 A aplicação foi testada sob a seguinte configuração de Virtual Host:
 
-	<VirtualHost *:SUA_PORTA>
-    
+	<VirtualHost *:SUA_PORTA>    
+
 		ServerName localhost:SUA_PORTA
-		DocumentRoot "D:\PROJETOS\zf1-loja\public"
-	 
+		DocumentRoot "D:\PROJETOS\zf1-loja\public"	 
 		SetEnv APPLICATION_ENV "development"
-	 
+		
 		<Directory "D:\PROJETOS\zf1-loja\public">
 			DirectoryIndex index.php
 			AllowOverride All
 			Order allow,deny
 			Allow from all
-		</Directory>
+		</Directory>	
 	
-	</VirtualHost>"
+	</VirtualHost>
 
 5) Alterar os parametros de acesso a banco de dados no arquivo "application/config/store.ini"
 conforme exemplo abaixo
@@ -64,6 +63,5 @@ Evoluções e futuras melhorias previstas para o projeto
 - disponibilização de opção para baixar a aplicação via composer
 - implementação da camada de persistência usando Doctrine
 - inclusao de cobertura de testes unitarios (PHPUnit)
-- o script ant será modificado de modo a gerar builds para ambiente development / production 
-separadamente, atualizando o arquivo store.ini conforme o ambiente target definido no build
+- o script ant será modificado de modo a gerar builds para ambiente development / production separadamente, atualizando o arquivo store.ini conforme o ambiente target definido no build
 - criar um novo projeto visando o desenvolvimento de uma aplicação sample similar usando Zend Framework 2
