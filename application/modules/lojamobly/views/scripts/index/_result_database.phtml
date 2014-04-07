@@ -1,0 +1,11 @@
+<div class="productitem clearfix">
+
+<?php foreach( $this->produtos as $produto ) { ?>
+	
+	<h4><a href="#"><?php echo @$produto['name'] ?></a></h4>
+    <p><?php echo @$produto['shortDescription'] ?></p>
+    <p><?php echo @$produto['price'] ?></p>
+	
+<?php } ?>	
+
+</div>

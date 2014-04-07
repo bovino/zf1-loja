@@ -1,0 +1,44 @@
+<div style="padding: 8px;">
+    <table style="width: 100%;">
+        <tbody>
+            <?
+            $i = 0;
+            foreach($this->element->getModel() as $item):
+            ?>
+            <tr <? if($i % 2){ echo 'class="odd"';};?>>
+                <td><?=$this->Escape($item->name); ?></td>
+                <td><?=$this->element->qtys->getElement($item->productId); ?></td>
+                <td class="rt"><?=$this->Cart()->formatAmount($item->getLineCost()); ?></td>
+            </tr>
+            <?
+            ++$i;
+            endforeach;
+            ?>
+            
+            <tr style="background-color:#CCCCCC">
+                <td colspan="2" class="rt"> <b> Valor Sub-total: </b> </td>
+                <td class="rt colRight">
+                <b> <?=$this->Cart()->formatAmount($this->element->getModel()->getSubTotal()); ?> </b> 
+                </td>
+            </tr>
+            
+            <tr style="background-color:#CCCCCC">
+                <td colspan="2" class="rt"> <b> Método de entrega: </b> <?=$this->element->getElement('shipping');?></td>
+                
+                <td class="rt colRight">
+                <b> <?=$this->Cart()->formatAmount($this->element->getModel()->getShippingCost()); ?> </b> 
+                </td>
+            </tr>
+            
+            <tr style="background-color:#CCCCCC">
+                <td colspan="2" class="rt"> <b> Valor total: </b> </td>
+                
+                <td class="rt">
+                <b> <?=$this->Cart()->formatAmount($this->element->getModel()->getTotal()); ?> </b> 
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <?=$this->element->getElement('update-cart'); ?>
+</div>
