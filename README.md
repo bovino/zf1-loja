@@ -1,5 +1,5 @@
 ==============================================================
-Projeto zf1-loja - Loja de exemplo feita em Zend Framework 1
+Projeto zf1-loja - Ecommerce / Loja online de exemplo feita em Zend Framework 1
 ==============================================================
 
 Orientações gerais para rodar e evoluir o projeto:
