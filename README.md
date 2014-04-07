@@ -15,29 +15,29 @@ usando engenharia reversa).
 4) Configurar apontamentos de Virtual Host para a pasta public da aplicação.
 A aplicação foi testada sob a seguinte configuração de Virtual Host:
 
-<VirtualHost *:SUA_PORTA>
+	<VirtualHost *:SUA_PORTA>
     
-	ServerName localhost:SUA_PORTA
-    DocumentRoot "D:\PROJETOS\zf1-loja\public"
- 
-    SetEnv APPLICATION_ENV "development"
- 
-    <Directory "D:\PROJETOS\zf1-loja\public">
-        DirectoryIndex index.php
-        AllowOverride All
-        Order allow,deny
-        Allow from all
-    </Directory>
+		ServerName localhost:SUA_PORTA
+		DocumentRoot "D:\PROJETOS\zf1-loja\public"
+	 
+		SetEnv APPLICATION_ENV "development"
+	 
+		<Directory "D:\PROJETOS\zf1-loja\public">
+			DirectoryIndex index.php
+			AllowOverride All
+			Order allow,deny
+			Allow from all
+		</Directory>
 	
-</VirtualHost>
+	</VirtualHost>"
 
 5) Alterar os parametros de acesso a banco de dados no arquivo "application/config/store.ini"
 conforme exemplo abaixo
 
-resources.db.params.dbname = "lojamobly"
-resources.db.params.username = "root"
-resources.db.params.password = ""
-resources.db.params.host = "localhost"
+	resources.db.params.dbname = "lojamobly"
+	resources.db.params.username = "root"
+	resources.db.params.password = ""
+	resources.db.params.host = "localhost"
 
 6) Assegurar que a aplicação terá permissçao de leitura e de escrita na pasta "data" 
 (a pasta será usada para escrever índices e arquivos usando componente Zend_Lucene)
@@ -48,7 +48,7 @@ a execução de uma bateria de testes unitários em PHPUnit, de modo que o build
 
 Créditos: Arquitetura baseada em fork realizado em projeto de exemplo 
 criado inicialmente por Keith Pope (http://www.thepopeisdead.com) 
-autor do livro 
+autor do livro Zend Framework 1.8 Web Application Development
 
 =================================================================
 Evoluções e futuras melhorias previstas para o projeto
@@ -56,12 +56,14 @@ Evoluções e futuras melhorias previstas para o projeto
 
 - finalizar a implementação da área administrativa da loja
 - refatoração para aplicação de namespaces
+- refatoração no modelo do banco de dados
 - implementar exemplo com código de integração real com gateways de pagamento PagSeguro, PayPal
 - implementar um layout e UX mais elaborandos, usando uma estrutura melhor de templates / temas / skins
+- implementar layout mais resposivo ou com detecção de user agent para compatibilidade com smartphones
 - remover os componentes do Zend que não estão sendo utilizados
 - disponibilização de opção para baixar a aplicação via composer
 - implementação da camada de persistência usando Doctrine
-- inclusao de cobertura de testes unitarios
+- inclusao de cobertura de testes unitarios (PHPUnit)
 - o script ant será modificado de modo a gerar builds para ambiente development / production 
 separadamente, atualizando o arquivo store.ini conforme o ambiente target definido no build
 - criar um novo projeto visando o desenvolvimento de uma aplicação sample similar usando Zend Framework 2
