@@ -22,7 +22,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
             'validate'
         );
 
-        $this->addElement('text', 'titulo', array(
+        $this->addElement('text', 'title', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
                 $validatorAlpha,
@@ -32,7 +32,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
             'label'      => 'Título',
         ));
 		
-		$this->addElement('text', 'assunto', array(
+		$this->addElement('text', 'subject', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
                 $validatorAlpha,
@@ -53,7 +53,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
             'label'      => 'Email',
         ));
 		
-		$this->addElement('textarea', 'mensagem', array(
+		$this->addElement('textarea', 'message', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
                 $validatorAlpha,
