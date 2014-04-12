@@ -46,16 +46,16 @@ Observações:
 
 - Para alterar configurações de manipulação de erros da aplicação, alterações configurações no arquivo "application/config/store.ini"
 
-	phpsettings.display_errors = 0
-	phpsettings.error_reporting = 8191
-	errorhandling.graceful = true
-	errorhandling.email = seu.email@gmail.com
-	[production : bootstrap]
-
-	[development : bootstrap]
-	phpsettings.display_errors = 0
-	resources.frontcontroller.throwexceptions = true
-	errorhandling.graceful = true
+		phpsettings.display_errors = 0
+		phpsettings.error_reporting = 8191
+		errorhandling.graceful = true
+		errorhandling.email = seu.email@gmail.com
+		[production : bootstrap]
+	
+		[development : bootstrap]
+		phpsettings.display_errors = 0
+		resources.frontcontroller.throwexceptions = true
+		errorhandling.graceful = true
 
 Créditos: Arquitetura baseada em fork realizado em projeto de exemplo criado inicialmente por Keith Pope (http://www.thepopeisdead.com) autor do livro Zend Framework 1.8 Web Application Development
 
