@@ -1,147 +1,251 @@
---
--- Definition of table `category`
---
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE TABLE  `category` (
-  `categoryId` int(10) unsigned NOT NULL auto_increment,
-  `name` varchar(200) NOT NULL,
-  `parentId` int(10) unsigned NOT NULL,
-  `ident` varchar(200) NOT NULL,
-  PRIMARY KEY  (`categoryId`),
-  UNIQUE KEY `ident` (`ident`),
-  KEY `parent` (`parentId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema lojamobly
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema lojaexemplozf
+-- -----------------------------------------------------
 
---
--- Definition of table `product`
---
+-- -----------------------------------------------------
+-- Table `category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `category` (
+  `categoryId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NOT NULL,
+  `parentId` INT(10) UNSIGNED NOT NULL,
+  `ident` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`categoryId`),
+  UNIQUE INDEX `ident` (`ident` ASC),
+  INDEX `parent` (`parentId` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE  `product` (
-  `productId` int(10) unsigned NOT NULL auto_increment,
-  `categoryId` int(10) unsigned NOT NULL,
-  `ident` varchar(56) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `description` text NOT NULL,
-  `shortDescription` varchar(200) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `discountPercent` int(3) NOT NULL,
-  `taxable` enum('Yes','No') NOT NULL,
-  PRIMARY KEY  (`productId`),
-  UNIQUE KEY `ident` (`ident`),
-  KEY `category` (`categoryId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
---
--- Definition of table `productImage`
---
+-- -----------------------------------------------------
+-- Table `page`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `page` (
+  `pageId` INT(11) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NOT NULL,
+  `body` TEXT NOT NULL,
+  PRIMARY KEY (`pageId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE  `productImage` (
-  `imageId` int(10) unsigned NOT NULL auto_increment,
-  `productId` int(10) unsigned NOT NULL,
-  `thumbnail` varchar(200) NOT NULL,
-  `full` varchar(200) NOT NULL,
-  `isDefault` enum('Yes','No') NOT NULL default 'No',
-  PRIMARY KEY  (`imageId`),
-  KEY `productId` (`productId`),
-  CONSTRAINT `fk_product` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
---
--- Definition of table `user`
---
+-- -----------------------------------------------------
+-- Table `product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `product` (
+  `productId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `categoryId` INT(10) UNSIGNED NOT NULL,
+  `ident` VARCHAR(56) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
+  `description` TEXT NOT NULL,
+  `shortDescription` VARCHAR(200) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `discountPercent` INT(3) NOT NULL,
+  `taxable` ENUM('Yes','No') NOT NULL,
+  PRIMARY KEY (`productId`),
+  UNIQUE INDEX `ident` (`ident` ASC),
+  INDEX `category` (`categoryId` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 20
+DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE  `user` (
-  `userId` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(10) NOT NULL,
-  `firstname` varchar(128) NOT NULL,
-  `lastname` varchar(128) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `passwd` char(40) NOT NULL,
-  `salt` char(32) NOT NULL,
-  `role` varchar(100) NOT NULL default 'customer',
-  PRIMARY KEY  (`userId`),
-  KEY `email_pass` (`email`,`passwd`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
---
--- Definition of table `page`
---
+-- -----------------------------------------------------
+-- Table `productimage`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `productimage` (
+  `imageId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `productId` INT(10) UNSIGNED NOT NULL,
+  `thumbnail` VARCHAR(200) NOT NULL,
+  `full` VARCHAR(200) NOT NULL,
+  `isDefault` ENUM('Yes','No') NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`imageId`),
+  INDEX `productId` (`productId` ASC),
+  CONSTRAINT `fk_product`
+    FOREIGN KEY (`productId`)
+    REFERENCES `product` (`productId`)
+    ON DELETE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE `page` (
-  `pageId` INT NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `body` Text NOT NULL,
-  PRIMARY KEY (`pageId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- SCRIPT DE DADOS / CONTEUDO
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user` (
+  `userId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(10) NOT NULL,
+  `firstname` VARCHAR(128) NOT NULL,
+  `lastname` VARCHAR(128) NOT NULL,
+  `email` VARCHAR(128) NOT NULL,
+  `passwd` CHAR(40) NOT NULL,
+  `salt` CHAR(32) NOT NULL,
+  `role` VARCHAR(100) NOT NULL DEFAULT 'customer',
+  PRIMARY KEY (`userId`),
+  INDEX `email_pass` (`email` ASC, `passwd` ASC),
+  INDEX `email` (`email` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
 
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-LOCK TABLES `category` WRITE;
-INSERT INTO `category` VALUES  (1,'Cashmere',6,'cashmere'),
- (2,'Silk',6,'silk'),
- (3,'Woolen',6,'woolen'),
- (4,'Caps',7,'caps'),
- (5,'Beenie',7,'beenie'),
- (6,'Scarves',0,'scarves'),
- (7,'Hats',0,'hats'),
- (8,'red-eye',5,'red-eye');
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-LOCK TABLES `product` WRITE;
-INSERT INTO `product` VALUES  (1,7,'product-1','product 1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','10.99',0,'Yes'),
- (2,7,'product-2','product 2','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (3,6,'product-3','product 3','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (4,5,'product-4','product 4','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (5,4,'product-5','product 5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (6,3,'product-6','product 6','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (7,2,'product-7','product 7','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',50,'Yes'),
- (8,1,'product-8','product 8','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (9,1,'product-9','product 9','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (10,2,'product-10','product 10','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (11,3,'product-11','product 11','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (12,4,'product-12','product 12','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (13,5,'product-13','product 13','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (14,6,'product-14','product 14','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (15,7,'product-15','product 15','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (16,6,'product-16','product 16','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (17,5,'product-17','product 17','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes'),
- (18,4,'product-18','product 18','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-INSERT INTO `product` VALUES  (19,8,'product-19','product 19','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu. Vivamus vel massa id orci faucibus euismod. Morbi condimentum magna. Proin ac augue quis ante placerat venenatis. Ut nulla diam, lacinia vitae, ornare et, laoreet a, tellus. Morbi dolor orci, adipiscing non, rhoncus id, pretium non, orci. Nullam non mi sit amet tellus placerat feugiat. Aenean adipiscing auctor risus. Morbi vitae tellus. Etiam sed erat. Integer eget lectus eu lorem varius porta. Donec at ipsum et neque euismod ultrices. Aenean elementum elit eget justo. Etiam quis nisl. In hac habitasse platea dictumst. ','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo diam, dictum ac, ultricies nec.','11.99',0,'Yes');
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+-- -----------------------------------------------------
+-- Table `category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `category` (
+  `categoryId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NOT NULL,
+  `parentId` INT(10) UNSIGNED NOT NULL,
+  `ident` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`categoryId`),
+  UNIQUE INDEX `ident` (`ident` ASC),
+  INDEX `parent` (`parentId` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8;
 
-/*!40000 ALTER TABLE `productImage` DISABLE KEYS */;
-LOCK TABLES `productImage` WRITE;
-INSERT INTO `productImage` VALUES  (1,5,'sm_raver.png','raver.jpg','Yes'),
- (2,19,'sm_raver.png','raver.jpg','Yes'),
- (3,18,'sm_wooly_beenie.png','wooly_beenie.jpg','Yes'),
- (4,17,'sm_raver.png','raver.jpg','Yes'),
- (5,16,'sm_sc.png','sc.png','Yes'),
- (6,15,'sm_raver.png','raver.jpg','Yes'),
- (7,14,'sm_sc.png','sc.png','Yes'),
- (8,13,'sm_wooly_beenie.png','wooly_beenie.jpg','Yes'),
- (9,12,'sm_wooly_beenie.png','wooly_beenie.jpg','Yes'),
- (10,11,'sm_sc.png','sc.png','Yes'),
- (11,10,'sm_sc.png','sc.png','Yes'),
- (12,9,'sm_sc.png','sc.png','Yes'),
- (13,8,'sm_sc.png','sc.png','Yes'),
- (14,7,'sm_sc.png','sc.png','Yes'),
- (15,6,'sm_sc.png','sc.png','Yes'),
- (16,5,'sm_raver.png','raver.jpg','No'),
- (17,4,'sm_wooly_beenie.png','wooly_beenie.jpg','Yes'),
- (18,3,'sm_sc.png','sc.png','Yes'),
- (19,2,'sm_raver.png','raver.jpg','Yes'),
- (20,1,'sm_raver.png','raver.jpg','Yes'),
- (21,1,'sm_raver.png','raver.jpg','No');
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `productImage` ENABLE KEYS */;
 
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-LOCK TABLES `user` WRITE;
-INSERT INTO `user` VALUES  (1,'Mr','Keith','Pope','me@me.com','28f92fdb9ac4133ce2267079c0ce324c5c09d463','da660cb994e214937a83afe5d215e401','Admin');
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+-- -----------------------------------------------------
+-- Table `contact`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `contact` (
+  `contactId` INT(10) NOT NULL,
+  `title` VARCHAR(200) NULL,
+  `message` TEXT NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `subject` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`contactId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `page`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `page` (
+  `pageId` INT(10) NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
+  `body` TEXT NOT NULL,
+  `section` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`pageId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `product` (
+  `productId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `categoryId` INT(10) UNSIGNED NOT NULL,
+  `ident` VARCHAR(56) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
+  `description` TEXT NOT NULL,
+  `shortDescription` VARCHAR(200) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `discountPercent` INT(3) NOT NULL,
+  `taxable` ENUM('Yes','No') NOT NULL,
+  PRIMARY KEY (`productId`),
+  UNIQUE INDEX `ident` (`ident` ASC),
+  INDEX `category` (`categoryId` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 20
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `productimage`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `productimage` (
+  `imageId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `productId` INT(10) UNSIGNED NOT NULL,
+  `thumbnail` VARCHAR(200) NOT NULL,
+  `full` VARCHAR(200) NOT NULL,
+  `isDefault` ENUM('Yes','No') NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`imageId`),
+  INDEX `productId` (`productId` ASC),
+  CONSTRAINT `fk_product`
+    FOREIGN KEY (`productId`)
+    REFERENCES `product` (`productId`)
+    ON DELETE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user` (
+  `userId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(10) NOT NULL,
+  `firstname` VARCHAR(128) NOT NULL,
+  `lastname` VARCHAR(128) NOT NULL,
+  `email` VARCHAR(128) NOT NULL,
+  `passwd` CHAR(40) NOT NULL,
+  `salt` CHAR(32) NOT NULL,
+  `role` VARCHAR(100) NOT NULL DEFAULT 'customer',
+  PRIMARY KEY (`userId`),
+  INDEX `email_pass` (`email` ASC, `passwd` ASC),
+  INDEX `email` (`email` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `tb_order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tb_order` (
+  `orderId` INT(10) NOT NULL,
+  `insertionDate` DATETIME NOT NULL,
+  `userId` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`orderId`),
+  INDEX `fk_tb_order_user1_idx` (`userId` ASC),
+  CONSTRAINT `fk_tb_order_user1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `user` (`userId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `tb_order_product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tb_order_product` (
+  `orderId` INT(10) NOT NULL,
+  `productId` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`orderId`, `productId`),
+  INDEX `fk_tb_order_has_product_product1_idx` (`productId` ASC),
+  INDEX `fk_tb_order_has_product_tb_order1_idx` (`orderId` ASC),
+  CONSTRAINT `fk_tb_order_has_product_tb_order1`
+    FOREIGN KEY (`orderId`)
+    REFERENCES `tb_order` (`orderId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_order_has_product_product1`
+    FOREIGN KEY (`productId`)
+    REFERENCES `product` (`productId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

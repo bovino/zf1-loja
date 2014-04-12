@@ -41,7 +41,6 @@ class LOJAEXEMPLOZF_ContactController extends Zend_Controller_Action
             return $this->render('index');
         }
 		
-		echo "Contato enviado"; die();
 	}
 	
     public function getContactForm()
