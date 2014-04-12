@@ -1,8 +1,8 @@
 ==============================================================
-Projeto zf1-loja - Ecommerce / Loja online de exemplo feita em Zend Framework 1
+Projeto zf1-loja - Ecommerce / Loja online de exemplo em Zend Framework 1
 ==============================================================
 
-Orientações gerais para rodar e evoluir o projeto:
+* Orientações gerais para rodar e evoluir o projeto: *
 
 1) Instalar um webserver Apache 2 + PHP 5.3 ou superior + MySQL 5
 
