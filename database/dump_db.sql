@@ -208,15 +208,15 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `tb_order`
+-- Table `order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tb_order` (
+CREATE TABLE IF NOT EXISTS `order` (
   `orderId` INT(10) NOT NULL,
   `insertionDate` DATETIME NOT NULL,
   `userId` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`orderId`),
-  INDEX `fk_tb_order_user1_idx` (`userId` ASC),
-  CONSTRAINT `fk_tb_order_user1`
+  INDEX `fk_order_user1_idx` (`userId` ASC),
+  CONSTRAINT `fk_order_user1`
     FOREIGN KEY (`userId`)
     REFERENCES `user` (`userId`)
     ON DELETE NO ACTION
@@ -225,20 +225,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `tb_order_product`
+-- Table `order_product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tb_order_product` (
+CREATE TABLE IF NOT EXISTS `order_product` (
   `orderId` INT(10) NOT NULL,
   `productId` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`orderId`, `productId`),
-  INDEX `fk_tb_order_has_product_product1_idx` (`productId` ASC),
-  INDEX `fk_tb_order_has_product_tb_order1_idx` (`orderId` ASC),
-  CONSTRAINT `fk_tb_order_has_product_tb_order1`
+  INDEX `fk_order_has_product_product1_idx` (`productId` ASC),
+  INDEX `fk_order_has_product_order1_idx` (`orderId` ASC),
+  CONSTRAINT `fk_order_has_product_order1`
     FOREIGN KEY (`orderId`)
-    REFERENCES `tb_order` (`orderId`)
+    REFERENCES `order` (`orderId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_order_has_product_product1`
+  CONSTRAINT `fk_order_has_product_product1`
     FOREIGN KEY (`productId`)
     REFERENCES `product` (`productId`)
     ON DELETE NO ACTION
