@@ -1,13 +1,9 @@
+-- Script de criação INICIAL da base de dados do sistema
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema lojamobly
--- -----------------------------------------------------
 -- -----------------------------------------------------
 -- Schema lojaexemplozf
 -- -----------------------------------------------------
@@ -121,11 +117,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `contact`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `contact` (
-  `contactId` INT(10) NOT NULL,
-  `title` VARCHAR(200) NULL,
-  `message` TEXT NULL DEFAULT NULL,
-  `email` VARCHAR(255) NULL DEFAULT NULL,
-  `subject` VARCHAR(200) NULL DEFAULT NULL,
+  `contactId` INT(10) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NOT NULL,
+  `message` TEXT NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `subject` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`contactId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
@@ -215,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `order` (
   `insertionDate` DATETIME NOT NULL,
   `userId` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`orderId`),
-  INDEX `fk_order_user1_idx` (`userId` ASC),
-  CONSTRAINT `fk_order_user1`
+  INDEX `fk_tb_order_user1_idx` (`userId` ASC),
+  CONSTRAINT `fk_tb_order_user1`
     FOREIGN KEY (`userId`)
     REFERENCES `user` (`userId`)
     ON DELETE NO ACTION
@@ -231,14 +227,14 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `orderId` INT(10) NOT NULL,
   `productId` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`orderId`, `productId`),
-  INDEX `fk_order_has_product_product1_idx` (`productId` ASC),
-  INDEX `fk_order_has_product_order1_idx` (`orderId` ASC),
-  CONSTRAINT `fk_order_has_product_order1`
+  INDEX `fk_tb_order_has_product_product1_idx` (`productId` ASC),
+  INDEX `fk_tb_order_has_product_tb_order1_idx` (`orderId` ASC),
+  CONSTRAINT `fk_tb_order_has_product_tb_order1`
     FOREIGN KEY (`orderId`)
     REFERENCES `order` (`orderId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_has_product_product1`
+  CONSTRAINT `fk_tb_order_has_product_product1`
     FOREIGN KEY (`productId`)
     REFERENCES `product` (`productId`)
     ON DELETE NO ACTION
