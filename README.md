@@ -1,7 +1,4 @@
-==============================================================
-Projeto zf1-loja - Ecommerce / Loja online de exemplo em Zend Framework 1
-==============================================================
-
+# Projeto zf1-loja - Ecommerce / Loja online de exemplo em Zend Framework 1 #
 # Orientações gerais para rodar e evoluir o projeto: 
 
 1) Instalar um webserver Apache 2 + PHP 5.3 ou superior + MySQL 5
@@ -59,9 +56,7 @@ Observações:
 
 Créditos: Arquitetura baseada em fork realizado em projeto de exemplo criado inicialmente por Keith Pope (http://www.thepopeisdead.com) autor do livro Zend Framework 1.8 Web Application Development
 
-=================================================================
-Evoluções e futuras melhorias previstas para o projeto
-==================================================================
+# Evoluções e futuras melhorias previstas para o projeto #
 
 - finalizar a implementação da área administrativa da loja (em andamento)
 - refatoração para aplicação de namespaces
