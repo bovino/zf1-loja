@@ -33,7 +33,7 @@ A aplicação foi testada sob a seguinte configuração de Virtual Host:
 5) Alterar os parametros de acesso a banco de dados no arquivo "application/config/store.ini"
 conforme exemplo abaixo
 
-	resources.db.params.dbname = "lojamobly"
+	resources.db.params.dbname = "lojaexemplozf"
 	resources.db.params.username = "root"
 	resources.db.params.password = ""
 	resources.db.params.host = "localhost"
@@ -49,7 +49,7 @@ Créditos: Arquitetura baseada em fork realizado em projeto de exemplo criado in
 Evoluções e futuras melhorias previstas para o projeto
 ==================================================================
 
-- finalizar a implementação da área administrativa da loja
+- finalizar a implementação da área administrativa da loja (em andamento)
 - refatoração para aplicação de namespaces
 - refatoração no modelo do banco de dados
 - implementar exemplo com código de integração real com gateways de pagamento PagSeguro, PayPal
