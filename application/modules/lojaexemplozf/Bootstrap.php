@@ -143,7 +143,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet('/css/form.css');
 
         // setting the site in the title
-        $this->_view->headTitle('LOJA MOBLY');
+        $this->_view->headTitle('LOJA EXEMPLO ZF');
 
         // setting a separator string for segments:
         $this->_view->headTitle()->setSeparator(' - ');
