@@ -10,20 +10,26 @@
 class LOJAEXEMPLOZF_ContactController extends Zend_Controller_Action 
 {
     protected $_model;
-    protected $_authService;
+	
+	 /**
+     * @var array
+     */
+    protected $_forms = array();
     
     public function init()
     {
         // get the default model
         $this->_model = new LOJAEXEMPLOZF_Model_Contact();
-        $this->_authService = new LOJAEXEMPLOZF_Service_Authentication();
 
         // add forms
         $this->view->contactForm = $this->getContactForm();
         
     }
     
-	public function send(){
+	public function indexAction(){
+	}
+	
+	public function sendAction(){
 		
 		echo "Contato enviado"; die();
 	}
@@ -32,9 +38,9 @@ class LOJAEXEMPLOZF_ContactController extends Zend_Controller_Action
     {
         $urlHelper = $this->_helper->getHelper('url');
         
-        $this->_forms['login'] = $this->_model->getForm('userLogin');
+        $this->_forms['contact'] = $this->_model->getForm('contactBase');
 		
-        $this->_forms['login']->setAction($urlHelper->url(array(
+        $this->_forms['contact']->setAction($urlHelper->url(array(
             'controller' => 'contact',
             'action'     => 'send',
             ), 
