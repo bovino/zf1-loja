@@ -7,5 +7,5 @@
  * @copyright  Copyright (c) 2008 Keith Pope (http://www.thepopeisdead.com)
  * @license    http://www.thepopeisdead.com/license.txt     New BSD License
  */
-class Cms_Resource_Page_Item extends LOJAMOBLY_Model_Resource_Db_Table_Row_Abstract implements Cms_Resource_Page_Item_Interface
+class Cms_Resource_Page_Item extends LOJAEXEMPLOZF_Model_Resource_Db_Table_Row_Abstract implements Cms_Resource_Page_Item_Interface
 {}

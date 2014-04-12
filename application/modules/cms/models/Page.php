@@ -1,5 +1,5 @@
 <?php
-class Cms_Model_Page extends LOJAMOBLY_Model_Abstract
+class Cms_Model_Page extends LOJAEXEMPLOZF_Model_Abstract
 {
     public function getPageById($id)
     {

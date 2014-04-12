@@ -1,13 +1,13 @@
 <?php
 /**
- * LOJAMOBLY_View_Helper_BaseUrl
+ * LOJAEXEMPLOZF_View_Helper_BaseUrl
  * 
  * Taken from proposal wiki
  * http://framework.zend.com/wiki/display/ZFPROP/Zend_View_Helper_BaseUrl
  * 
  * @author     Geoffrey Tran, Robin Skoglund
  * @category   Storefront
- * @package    LOJAMOBLY_View_Helper
+ * @package    LOJAEXEMPLOZF_View_Helper
  * @copyright  Copyright (c) 2008 Keith Pope (http://www.thepopeisdead.com)
  * @license    http://www.thepopeisdead.com/license.txt     New BSD License
  */
