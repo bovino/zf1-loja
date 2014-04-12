@@ -11,8 +11,11 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
 {
     public function init()
     {
+			
+		//validaçao de caracteres alfa numericos permitindo espaços em branco	
+		$validatorAlpha = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));	
         
-		            // add path to custom validators
+		// add path to custom validators
         $this->addElementPrefixPath(
             'LOJAEXEMPLOZF_Validate',
             APPLICATION_PATH . '/modules/lojaexemplozf/models/validate/',
@@ -22,7 +25,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
         $this->addElement('text', 'titulo', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                'Alpha',
+                $validatorAlpha,
                 array('StringLength', true, array(3, 128))
             ),
             'required'   => true,
@@ -32,7 +35,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
 		$this->addElement('text', 'assunto', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                'Alpha',
+                $validatorAlpha,
                 array('StringLength', true, array(3, 128))
             ),
             'required'   => true,
@@ -53,7 +56,7 @@ class LOJAEXEMPLOZF_Form_Contact_Base extends LOJAEXEMPLOZF_Form_Abstract
 		$this->addElement('textarea', 'mensagem', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                'Alpha',
+                $validatorAlpha,
                 array('StringLength', true, array(3, 128))
             ),
             'required'   => true,

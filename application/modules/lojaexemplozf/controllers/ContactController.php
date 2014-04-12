@@ -31,6 +31,16 @@ class LOJAEXEMPLOZF_ContactController extends Zend_Controller_Action
 	
 	public function sendAction(){
 		
+		$request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->_helper->redirector('index');
+        }
+
+        if (false === $this->_model->save( $this->view->contactForm, $request->getPost(), array('role' => 'Guest'))) {
+            return $this->render('index');
+        }
+		
 		echo "Contato enviado"; die();
 	}
 	

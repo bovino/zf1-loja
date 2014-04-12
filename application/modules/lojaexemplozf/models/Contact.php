@@ -18,7 +18,7 @@ class LOJAEXEMPLOZF_Model_Contact extends LOJAEXEMPLOZF_Model_Acl_Abstract
      * @param  array     $defaults Default values
      * @return false|int 
      */
-    protected function save($form, $info, $defaults=array())
+    public function save($form, $info, $defaults=array())
     {       
         if (!$form->isValid($info)) {
             return false;
