@@ -40,7 +40,22 @@ conforme exemplo abaixo
 6) Assegurar que a aplicação terá permissçao de leitura e de escrita na pasta "data" 
 (a pasta será usada para escrever índices e arquivos usando componente Zend_Lucene)
 
-Observação: A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) para fornecer apoio e automação em atividades de build. Esse script futuramente será modificado para incluir a execução de uma bateria de testes unitários em PHPUnit, de modo que o build só rode se tudo estiver ok nos testes.
+Observações: 
+
+- A aplicação traz um script ant (contido em /build/build.xml e parametros contidos em /build/ant.properties) para fornecer apoio e automação em atividades de build. Esse script futuramente será modificado para incluir a execução de uma bateria de testes unitários em PHPUnit, de modo que o build só rode se tudo estiver ok nos testes.
+
+- Para alterar configurações de manipulação de erros da aplicação, alterações configurações no arquivo "application/config/store.ini"
+
+	phpsettings.display_errors = 0
+	phpsettings.error_reporting = 8191
+	errorhandling.graceful = true
+	errorhandling.email = seu.email@gmail.com
+	[production : bootstrap]
+
+	[development : bootstrap]
+	phpsettings.display_errors = 0
+	resources.frontcontroller.throwexceptions = true
+	errorhandling.graceful = true
 
 Créditos: Arquitetura baseada em fork realizado em projeto de exemplo criado inicialmente por Keith Pope (http://www.thepopeisdead.com) autor do livro Zend Framework 1.8 Web Application Development
 
