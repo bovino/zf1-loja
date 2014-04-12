@@ -8,9 +8,8 @@ Orientações gerais para rodar e evoluir o projeto:
 
 2) Baixar o projeto para uma pasta qualquer
 
-3) Criar uma base de dados no MySQL e rodar o dump (que está em "database/dump_db.sql") nesta base.
-A pasta "database" também contém diagrama MER da base de dados (gerados com o MySQL Workbench 
-usando engenharia reversa).
+3) Criar uma base de dados no MySQL (usando colation e charset em UTF8) e rodar o script/dump (que está em "database/dump_db.sql") nesta base.
+A pasta "database" também contém diagrama MER da base de dados (gerados com o MySQL Workbench).
 
 4) Configurar apontamentos de Virtual Host para a pasta public da aplicação.
 A aplicação foi testada sob a seguinte configuração de Virtual Host:
